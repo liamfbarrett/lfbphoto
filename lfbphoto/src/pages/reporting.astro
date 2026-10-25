@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import { reporting, profiles } from '../data/reporting';
+
+const shownProfiles = profiles.filter((p) => p.url);
+---
+
+<Base title="Reporting | Liam Barrett">
+  <div class="reporting">
+    <h1 class="sr-only">Reporting</h1>
+    {
+      reporting.map((section) => (
+        <section>
+          <h2>{section.heading}</h2>
+          <ul>
+            {section.items.map((item) => (
+              <li>
+                {item.url ? (
+                  <a href={item.url} target="_blank" rel="noopener">
+                    {item.title}
+                  </a>
+                ) : (
+                  <span>{item.title}</span>
+                )}
+                {item.note && <small>{item.note}</small>}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+    {
+      shownProfiles.length > 0 && (
+        <p class="profiles">
+          {shownProfiles.map((p) => (
+            <a href={p.url} target="_blank" rel="noopener">
+              {p.label}
+            </a>
+          ))}
+        </p>
+      )
+    }
+  </div>
+</Base>

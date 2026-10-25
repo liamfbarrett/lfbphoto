@@ -1,0 +1,80 @@
+---
+import '@fontsource-variable/dm-sans';
+import '../styles/global.css';
+import { site, categories, hrefFor } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = site.name, description = site.description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => current === (href.replace(/\/$/, '') || '/');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <noscript><style>#site-nav { display: flex !important; }</style></noscript>
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="side">
+        <div class="side-top">
+          <a class="name" href="/">{site.name}</a>
+          <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+        </div>
+        <nav id="site-nav" aria-label="Main">
+          <ul class="nav-list">
+            {
+              categories.map((c) => (
+                <li>
+                  <a href={hrefFor(c.slug)} aria-current={isActive(hrefFor(c.slug)) ? 'page' : undefined}>
+                    {c.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+          <div class="side-bottom">
+            <a class="about-link" href="/about/" aria-current={isActive('/about/') ? 'page' : undefined}>About</a>
+            <div class="icons">
+              <a href={`mailto:${site.email}`} aria-label="Email">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M3 7l9 6.5L21 7"/></svg>
+              </a>
+              <a href={site.instagram} aria-label="Instagram" rel="noopener">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>
+              </a>
+              <a href={site.linkedin} aria-label="LinkedIn" rel="noopener">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><rect x="2.5" y="9" width="4" height="12"/><circle cx="4.5" cy="4.6" r="2.2"/><path d="M9.5 9h3.8v1.8c.8-1.4 2.3-2.1 4-2.1 3.3 0 4.2 2.1 4.2 5.2V21h-4v-6.2c0-1.4-.4-2.3-1.8-2.3s-2.2 1-2.2 2.4V21h-4z"/></svg>
+              </a>
+            </div>
+          </div>
+        </nav>
+      </aside>
+      <main>
+        <slot />
+      </main>
+    </div>
+    <script>
+      const btn = document.querySelector('.menu-btn');
+      const side = document.querySelector('.side');
+      btn?.addEventListener('click', () => {
+        const open = side?.classList.toggle('open') ?? false;
+        btn.setAttribute('aria-expanded', String(open));
+      });
+    </script>
+  </body>
+</html>

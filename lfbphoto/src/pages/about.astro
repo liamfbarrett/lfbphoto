@@ -1,0 +1,77 @@
+---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Base from '../layouts/Base.astro';
+import { site, awards } from '../data/site';
+
+// Put your about-page photo in src/photos/about/ (the first file, by name, is used).
+const modules = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/photos/about/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}',
+  { eager: true }
+);
+const portrait = Object.entries(modules)
+  .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
+  .map(([, m]) => m.default)[0];
+---
+
+<Base title="About | Liam Barrett">
+  <h1 class="about-head">
+    <span>When?</span> <span>Where?</span> <span>Why?</span> <strong>Who?</strong> <span>What?</span>
+  </h1>
+
+  <section class="about">
+    <figure>
+      {
+        portrait && (
+          <div class="frame">
+            <Picture
+              src={portrait}
+              alt="Liam Barrett photographing with a Canon camera"
+              formats={['avif', 'webp']}
+              widths={[480, 800, 1200]}
+              sizes="(max-width: 820px) 100vw, 45vw"
+              quality={85}
+              loading="eager"
+            />
+          </div>
+        )
+      }
+      <figcaption>Photo courtesy of Savannah Bond/Medill Cherubs (2024)</figcaption>
+    </figure>
+
+    <div class="bio">
+      <p>
+        Liam Barrett is a freelance photographer and journalist based in Evanston/Chicago, IL. He is the Multimedia
+        Managing Editor at The Daily Northwestern and formerly served as Photo Editor. He is a freshman at Northwestern
+        University pursuing a Bachelor of Science in Journalism at the Medill School of Journalism.
+      </p>
+      <p>
+        Liam has covered 'No Kings' protests, Dillo Day and more dance performances than he can count. At NU, he has
+        worked as a photographer for numerous student performance groups, including Fusion, Boomshaka, Graffiti, Deeva,
+        Ahana and Tonik.
+      </p>
+      <p>
+        Liam is currently pursuing photojournalism research in D.C. on street art as a form of political dissent,
+        funded by a grant from Northwestern's Office of Undergraduate Research.
+      </p>
+      <p>
+        You can find his work and follow his progress on Instagram at
+        <a href={site.instagram} rel="noopener">@lfb_photo</a>. You can email him at
+        <a href={`mailto:${site.email}`}>{site.email}</a>. Bookings can be made via both Instagram or email.
+      </p>
+    </div>
+  </section>
+
+  {
+    awards.length > 0 && (
+      <section class="awards">
+        <h2>Awards and Recognition</h2>
+        <ul>
+          {awards.map((a) => (
+            <li>{a}</li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+</Base>

@@ -1,0 +1,46 @@
+---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  folder: string;
+  label: string;
+}
+
+const { folder, label } = Astro.props;
+
+const modules = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/photos/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}',
+  { eager: true }
+);
+
+// Photos show in filename order, so name them 01-..., 02-... to control the order.
+const photos = Object.entries(modules)
+  .filter(([path]) => path.startsWith(`/src/photos/${folder}/`))
+  .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
+  .map(([, mod]) => mod.default);
+---
+
+{
+  photos.length === 0 ? (
+    <p class="empty">
+      No photos here yet. Add images to <code>src/photos/{folder}/</code> and they will appear after the next build.
+    </p>
+  ) : (
+    <ul class="gallery">
+      {photos.map((img, i) => (
+        <li style={`--ratio:${(img.width / img.height).toFixed(4)}`}>
+          <Picture
+            src={img}
+            alt={`${label} photograph ${i + 1}`}
+            formats={['avif', 'webp']}
+            widths={[480, 800, 1200, 1800, 2400]}
+            sizes="(max-width: 820px) 100vw, 55vw"
+            quality={82}
+            loading={i < 3 ? 'eager' : 'lazy'}
+          />
+        </li>
+      ))}
+    </ul>
+  )
+}

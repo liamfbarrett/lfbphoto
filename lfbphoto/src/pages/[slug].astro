@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import Gallery from '../components/Gallery.astro';
+import { categories } from '../data/site';
+
+export function getStaticPaths() {
+  return categories
+    .filter((c) => c.slug !== 'singles' && c.kind !== 'page')
+    .map((c) => ({ params: { slug: c.slug }, props: { category: c } }));
+}
+
+const { category } = Astro.props;
+---
+
+<Base title={`${category.title} | Liam Barrett`}>
+  <h1 class="sr-only">{category.title}</h1>
+  <Gallery folder={category.slug} label={category.title} />
+</Base>
