@@ -2,7 +2,22 @@
 import { Picture } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import Base from '../layouts/Base.astro';
-import { site, awards } from '../data/site';
+import { site } from '../data/site';
+
+// Awards: one entry per item. `note` is the italic text; `block: true` puts the note on its own line.
+// Delete the whole awards list (set it to []) to hide the section.
+const awards: { text: string; note?: string; block?: boolean }[] = [
+  {
+    text: '$4,000 Summer Undergraduate Research Grant for an eight-week, independent photojournalism project, 2026',
+    note: '(“Photographing and Analyzing Street Art as a Form of Political Dissent in Washington, D.C.”)',
+    block: true,
+  },
+  {
+    text: '$2,500/year Local Media Consortium (LMC) Journalism Scholarship, 2025',
+    note: '($10,000 by graduation)',
+  },
+  { text: 'NSPA Digital Story of the Year Finalist – Podcast, 2024' },
+];
 
 // Put your about-page photo in src/photos/about/ (the first file, by name, is used).
 const modules = import.meta.glob<{ default: ImageMetadata }>(
@@ -68,10 +83,37 @@ const portrait = Object.entries(modules)
         <h2>Awards and Recognition</h2>
         <ul>
           {awards.map((a) => (
-            <li>{a}</li>
+            <li>
+              {a.text}
+              {a.note && (
+                <>
+                  {a.block ? <br /> : ' '}
+                  <em>{a.note}</em>
+                </>
+              )}
+            </li>
           ))}
         </ul>
       </section>
     )
   }
 </Base>
+
+<style>
+  /* lines the first line of text up with the top of the photo frame */
+  .bio { margin-top: -0.6rem; }
+
+  .awards { max-width: 46rem; margin: 0 auto; padding: 2.5rem 1.5rem 3rem; text-align: center; }
+  .awards h2 {
+    width: fit-content; margin: 0 auto 1.1rem; padding-bottom: 0.7rem;
+    font-size: 1.6rem; border-bottom: 1px solid var(--ink);
+  }
+  .awards ul { list-style: none; margin: 0; padding: 0; }
+  .awards li { margin: 0; line-height: 1.55; }
+  .awards li + li::before { content: '~'; display: block; margin: 0.35rem 0; }
+  .awards em { font-weight: 300; }
+
+  @media (max-width: 820px) {
+    .bio { margin-top: 0; }
+  }
+</style>
