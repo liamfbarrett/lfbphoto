@@ -53,7 +53,7 @@ img { display: block; max-width: 100%; }
 .name {
   display: inline-block;
   background: var(--ink); color: #fff;
-  font-size: 1.8rem; font-weight: 500; line-height: 1.2;
+  font-size: 2.2rem; font-weight: 500; line-height: 1.2;
   text-transform: uppercase; text-decoration: none;
   padding: 0.35rem 0.8rem;
 }
