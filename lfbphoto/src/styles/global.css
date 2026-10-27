@@ -91,6 +91,8 @@ a[aria-current='page'] { color: var(--accent); }
 .icons a:hover { color: var(--accent); }
 
 main { padding: var(--gap) var(--gap) var(--gap) 0; min-width: 0; }
+main:has(.gallery) { background: #1c1c1c; padding-left: var(--gap); }
+@media (max-width: 820px) { main:has(.gallery) { padding-top: var(--gap); } }
 
 /* ---------- Gallery: rows fill the width, every photo keeps its true shape ---------- */
 .gallery {
@@ -101,8 +103,8 @@ main { padding: var(--gap) var(--gap) var(--gap) 0; min-width: 0; }
   flex-grow: calc(var(--ratio) * 100);
   flex-basis: calc(var(--ratio) * var(--row-h));
   min-width: 0;
+  max-width: calc(var(--ratio) * 700px);
 }
-.gallery::after { content: ''; flex-grow: 1000000; }
 .gallery img { width: 100%; height: auto; }
 
 .empty { padding: 3rem 2rem; color: var(--caption); }
