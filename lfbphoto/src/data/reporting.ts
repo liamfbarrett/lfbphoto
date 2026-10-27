@@ -42,6 +42,6 @@ export const reporting: { heading: string; items: ReportingItem[] }[] = [
 
 // Links shown at the bottom of the page. Only entries with a url are shown.
 export const profiles: { label: string; url: string }[] = [
-  { label: 'The Daily Northwestern profile', url: '' },
-  { label: 'The Pitch profile', url: '' },
+  { label: 'The Daily Northwestern profile', url: 'https://dailynorthwestern.com/staff_name/liam-barrett/' },
+  { label: 'The Pitch profile', url: 'https://wjpitch.com/staff_name/liam-barrett/' },
 ];
