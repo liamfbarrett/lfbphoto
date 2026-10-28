@@ -54,10 +54,10 @@ const isActive = (href: string) => current === (href.replace(/\/$/, '') || '/');
               <a href={`mailto:${site.email}`} aria-label="Email">
                 <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M3 7l9 6.5L21 7"/></svg>
               </a>
-              <a href={site.instagram} aria-label="Instagram" rel="noopener">
+                <a href={site.instagram} aria-label="Instagram" target="_blank" rel="noopener noreferrer">
                 <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg>
               </a>
-              <a href={site.linkedin} aria-label="LinkedIn" rel="noopener">
+                <a href={site.linkedin} aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
                 <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><rect x="2.5" y="9" width="4" height="12"/><circle cx="4.5" cy="4.6" r="2.2"/><path d="M9.5 9h3.8v1.8c.8-1.4 2.3-2.1 4-2.1 3.3 0 4.2 2.1 4.2 5.2V21h-4v-6.2c0-1.4-.4-2.3-1.8-2.3s-2.2 1-2.2 2.4V21h-4z"/></svg>
               </a>
             </div>
