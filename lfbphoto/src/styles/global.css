@@ -112,8 +112,10 @@ main:has(.gallery) { background: #1c1c1c; padding-left: var(--gap); }
 
 /* ---------- About ---------- */
 .about-head {
-  margin: 0; padding: 0.5rem 1rem 0 1.5rem;
-  font-size: clamp(1.7rem, 5vw, 4rem); font-weight: 500; line-height: 1.15;
+  display: flex; justify-content: space-between; flex-wrap: nowrap;
+  margin: 0; padding: 0.5rem 1.5rem 0;
+  font-size: min(7rem, calc((100vw - var(--side-w) - 4rem) / 16.5));
+  font-weight: 500; line-height: 1.15;
 }
 .about-head span { color: var(--muted); font-style: italic; }
 .about-head strong { color: var(--ink); font-weight: 700; }
@@ -168,7 +170,10 @@ figcaption { margin-top: 0.5rem; font-size: 0.9rem; font-style: italic; color: v
   .side-bottom { padding-top: 1rem; }
   main { padding: 0 var(--gap) var(--gap); }
   .about { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; padding: 1.5rem 1rem 1rem; }
-  .about-head { padding: 0.5rem 1rem 0; }
+  .about-head {
+    flex-wrap: wrap; justify-content: flex-start; gap: 0 0.45em;
+    padding: 0.5rem 1rem 0; font-size: clamp(1.6rem, 8.5vw, 3rem);
+  }
   .reporting { padding: 1rem 1rem 2rem; }
 }
 
