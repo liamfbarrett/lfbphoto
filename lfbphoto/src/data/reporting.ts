@@ -14,10 +14,10 @@ export const reporting: { heading: string; items: ReportingItem[] }[] = [
     heading: 'Writing',
     items: [
       { title: 'ETHS community reacts to Halloween ICE arrests, campus lockdown with fear, anger', url: 'https://dailynorthwestern.com/2025/11/05/city/eths-community-reacts-to-halloween-ice-arrests-campus-lockdown-with-fear-anger/' },
+      { title: 'For these zombies, ‘The Night of the Walking Dead’ ends at 10 p.m. sharp', url: 'https://dailynorthwestern.com/2026/11/13/lateststories/for-these-zombies-the-night-of-the-walking-dead-ends-at-10-p-m-sharp/' },
       { title: '‘A caring, warm presence’: Sorority house directors make students feel at home, manage behind-the-scenes', url: 'https://dailynorthwestern.com/2026/05/27/campus/a-caring-warm-presence-sorority-house-directors-make-students-feel-at-home-manage-behind-the-scenes/' },
       { title: 'Putting the ‘cat’ in Wildcat: the furries and therians of WJ', url: 'https://wjpitch.com/feature/wj-feature/2025/03/07/putting-the-cat-in-wildcat-the-furries-and-therians-of-wj/' },
       { title: 'WJ community mourns student, supports family', url: 'https://wjpitch.com/news/wj-news/2024/12/13/wj-community-mourns-student-supports-family/' },
-      { title: 'STAGE salvages ‘Grimm’ choice of play', url: 'https://wjpitch.com/arts-and-entertainment/wj-arts-and-entertainment/2024/11/15/stage-salvages-grimm-choice-of-play-2/' },
     ],
   },
   {
